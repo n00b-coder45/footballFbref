@@ -1,0 +1,120 @@
+import java.util.Scanner;
+
+// Base class representing the MainOS
+class MainOS {
+    protected boolean mouseOperable;
+    protected String desktop;
+    protected String fileManager;
+
+    public MainOS() {
+        mouseOperable = true;
+        desktop = "Default Desktop";
+        fileManager = "Default File Manager";
+    }
+
+    public void displayFeatures() {
+        System.out.println("Mouse operable: " + mouseOperable);
+        System.out.println("Desktop: " + desktop);
+        System.out.println("File Manager: " + fileManager);
+    }
+}
+
+// Derived class for Windows OS
+class WinOS extends MainOS {
+    private String cmd;
+
+    public WinOS() {
+        cmd = "Command Prompt";
+    }
+
+    @Override
+    public void displayFeatures() {
+        super.displayFeatures();
+        System.out.println("Command Line Interface: " + cmd);
+    }
+}
+
+// Derived class for Linux OS
+class LinuxOS extends MainOS {
+    private String terminal;
+
+    public LinuxOS() {
+        terminal = "Terminal";
+    }
+
+    @Override
+    public void displayFeatures() {
+        super.displayFeatures();
+        System.out.println("Terminal: " + terminal);
+    }
+}
+
+// Derived class for MacOS
+class MacOS extends MainOS {
+    private String terminal;
+
+    public MacOS() {
+        terminal = "Terminal";
+    }
+
+    @Override
+    public void displayFeatures() {
+        super.displayFeatures();
+        System.out.println("Terminal: " + terminal);
+    }
+}
+
+// Class representing a Dell laptop
+class DellLaptop {
+    private MainOS os;
+
+    public DellLaptop(MainOS os) {
+        this.os = os;
+    }
+
+    public void displayFeatures() {
+        System.out.println("Dell Laptop Features:");
+        os.displayFeatures();
+    }
+}
+
+public class OperatingSystemMenu {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int choice;
+
+        do {
+            System.out.println("Welcome to Dell Laptop OS selection:");
+            System.out.println("1. Windows OS");
+            System.out.println("2. Linux OS");
+            System.out.println("3. MacOS");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+
+            choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    DellLaptop winLaptop = new DellLaptop(new WinOS());
+                    winLaptop.displayFeatures();
+                    break;
+                case 2:
+                    DellLaptop linuxLaptop = new DellLaptop(new LinuxOS());
+                    linuxLaptop.displayFeatures();
+                    break;
+                case 3:
+                    DellLaptop macLaptop = new DellLaptop(new MacOS());
+                    macLaptop.displayFeatures();
+                    break;
+                case 4:
+                    System.out.println("Exiting the program.");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+                    break;
+            }
+        } while (choice != 4);
+
+        scanner.close();
+    }
+}

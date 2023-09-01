@@ -1,5 +1,106 @@
 
 
+using System;
+
+// Define the Imylterator interface
+public interface Imylterator
+{
+    int next();
+    void begin();
+    bool hasNext();
+}
+
+// Define the myCollection class
+public class myCollection
+{
+    private int[] arr = new int[10000];
+    private int tos = -1;
+
+    public void Add(int i)
+    {
+        if (tos < 9999)
+        {
+            tos++;
+            arr[tos] = i;
+        }
+    }
+
+    public Imylterator GetIterator()
+    {
+        return new myIterator(this);
+    }
+
+    // Inner class myIterator that implements Imylterator
+    private class myIterator : Imylterator
+    {
+        private myCollection collection;
+        private int nav = -1;
+
+        public myIterator(myCollection collection)
+        {
+            this.collection = collection;
+        }
+
+        public int next()
+        {
+            if (collection.tos != -1 && nav <= collection.tos)
+            {
+                int value = collection.arr[nav];
+                nav++;
+                return value;
+            }
+            else
+            {
+                throw new InvalidOperationException("No more elements to iterate.");
+            }
+        }
+
+        public void begin()
+        {
+            if (collection.tos >= 0)
+            {
+                nav = 0;
+            }
+        }
+
+        public bool hasNext()
+        {
+            return nav <= collection.tos;
+        }
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        myCollection c1 = new myCollection();
+
+        // Adding elements manually
+        c1.Add(11);
+        c1.Add(22);
+        c1.Add(33);
+
+        Imylterator it = c1.GetIterator();
+        it.begin();
+
+        while (it.hasNext())
+        {
+            Console.WriteLine(it.next());
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 using System;

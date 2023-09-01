@@ -1,6 +1,125 @@
 
 
 
+
+using System;
+
+// Define the Operation interface with the 'op' method
+interface Operation
+{
+    int op(int num1, int num2);
+}
+
+// Create classes for different mathematical operations
+class Sum : Operation
+{
+    public int op(int num1, int num2)
+    {
+        return num1 + num2;
+    }
+}
+
+class Sub : Operation
+{
+    public int op(int num1, int num2)
+    {
+        return num1 - num2;
+    }
+}
+
+class Mul : Operation
+{
+    public int op(int num1, int num2)
+    {
+        return num1 * num2;
+    }
+}
+
+class Div : Operation
+{
+    public int op(int num1, int num2)
+    {
+        if (num2 != 0)
+        {
+            return num1 / num2;
+        }
+        else
+        {
+            Console.WriteLine("Error: Division by zero");
+            return 0;
+        }
+    }
+}
+
+// Define a MathOperation class that takes two operands and an operation
+class MathOperation
+{
+    private int Operand1;
+    private int Operand2;
+    private Operation operation;
+
+    public MathOperation(int operand1, int operand2, Operation operation)
+    {
+        Operand1 = operand1;
+        Operand2 = operand2;
+        this.operation = operation;
+    }
+
+    public void operate()
+    {
+        int result = operation.op(Operand1, Operand2);
+        Console.WriteLine("Result: " + result);
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Enter Operand 1:");
+        int operand1 = Convert.ToInt32(Console.ReadLine());
+
+        Console.WriteLine("Enter Operand 2:");
+        int operand2 = Convert.ToInt32(Console.ReadLine());
+
+        // Create objects of different operation classes
+        Operation sumOperation = new Sum();
+        Operation subOperation = new Sub();
+        Operation mulOperation = new Mul();
+        Operation divOperation = new Div();
+
+        // Create MathOperation objects and perform operations
+        MathOperation sumMath = new MathOperation(operand1, operand2, sumOperation);
+        MathOperation subMath = new MathOperation(operand1, operand2, subOperation);
+        MathOperation mulMath = new MathOperation(operand1, operand2, mulOperation);
+        MathOperation divMath = new MathOperation(operand1, operand2, divOperation);
+
+        Console.WriteLine("Sum:");
+        sumMath.operate();
+
+        Console.WriteLine("Subtraction:");
+        subMath.operate();
+
+        Console.WriteLine("Multiplication:");
+        mulMath.operate();
+
+        Console.WriteLine("Division:");
+        divMath.operate();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 using System;
 
 class Program

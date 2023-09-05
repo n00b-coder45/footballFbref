@@ -1,5 +1,151 @@
 
 
+using System;
+
+class Employee
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+
+    public Employee(string name, int age)
+    {
+        Name = name;
+        Age = age;
+    }
+}
+
+class DuplicateNameException : Exception
+{
+    public DuplicateNameException(string name)
+        : base($"Duplicate Name: {name} (Need double Salary??)")
+    {
+    }
+}
+
+class InvalidAgeException : Exception
+{
+    public InvalidAgeException(int age)
+        : base(age < 18 ? "Children not allowed as an Employee" :
+               age > 60 ? "Seniors not allowed as an Employee" :
+               age < 0 ? "Ghosts not allowed as an Employee" :
+               age > 100 ? "Purvaj not allowed as an Employee" :
+               "Invalid Age")
+    {
+    }
+}
+
+class Program
+{
+    static Employee[] employees = new Employee[100]; // Change the size of the array as needed
+    static int employeeCount = 0;
+
+    static void Main(string[] args)
+    {
+        while (true)
+        {
+            Console.WriteLine("Menu:");
+            Console.WriteLine("1. Enter new Employee");
+            Console.WriteLine("2. List the Employees");
+            Console.WriteLine("3. Exit");
+            Console.Write("Enter your choice: ");
+            
+            int choice;
+            if (int.TryParse(Console.ReadLine(), out choice))
+            {
+                switch (choice)
+                {
+                    case 1:
+                        EnterNewEmployee();
+                        break;
+                    case 2:
+                        ListEmployees();
+                        break;
+                    case 3:
+                        Environment.Exit(0);
+                        break;
+                    default:
+                        Console.WriteLine("Invalid choice. Try again.");
+                        break;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid input. Try again.");
+            }
+        }
+    }
+
+    static void EnterNewEmployee()
+    {
+        try
+        {
+            Console.Write("Enter Employee Name: ");
+            string name = Console.ReadLine();
+
+            if (IsNameDuplicate(name))
+            {
+                throw new DuplicateNameException(name);
+            }
+
+            Console.Write("Enter Employee Age: ");
+            int age = int.Parse(Console.ReadLine());
+
+            if (age < 0 || age > 100)
+            {
+                throw new InvalidAgeException(age);
+            }
+
+            if (employeeCount < employees.Length)
+            {
+                employees[employeeCount++] = new Employee(name, age);
+                Console.WriteLine("Employee added successfully.");
+            }
+            else
+            {
+                Console.WriteLine("Maximum number of employees reached.");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+            if (ex.InnerException != null)
+            {
+                Console.WriteLine($"Inner Exception: {ex.InnerException.Message}");
+            }
+        }
+    }
+
+    static bool IsNameDuplicate(string name)
+    {
+        for (int i = 0; i < employeeCount; i++)
+        {
+            if (employees[i] != null && employees[i].Name.Equals(name, StringComparison.OrdinalIgnoreCase))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    static void ListEmployees()
+    {
+        Console.WriteLine("List of Employees:");
+        for (int i = 0; i < employeeCount; i++)
+        {
+            Console.WriteLine($"Name: {employees[i].Name}, Age: {employees[i].Age}");
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
 
 
 using System;

@@ -1,5 +1,52 @@
 
 
+
+
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        try
+        {
+            if (args.Length % 2 != 0)
+            {
+                throw new ArgumentException("The list is not complete");
+            }
+
+            int hoursInADay = 8;
+            for (int i = 0; i < args.Length; i += 2)
+            {
+                string topic = args[i];
+                if (!int.TryParse(args[i + 1], out int hours))
+                {
+                    throw new ArgumentException("The list is incorrect");
+                }
+
+                int trainingDays = (int)Math.Ceiling((double)hours / hoursInADay);
+                Console.WriteLine($"{topic}: {trainingDays} days training");
+            }
+        }
+        catch (ArgumentException ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("An error occurred: " + ex.Message);
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
 using System;
 
 // Define the Imylterator interface

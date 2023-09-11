@@ -1,5 +1,58 @@
 
 
+BitArray actual = new BitArray(4);
+actual[0] = true;   // Q1: Collection namespace has ICollection interface (True)
+actual[1] = false;  // Q2: An IList in C# represents the class List in other languages (False)
+actual[2] = false;  // Q3: An Array and any collection is interchangeable object Types (False)
+actual[3] = true;   // Q4: Collection is a part of BCL in .Net Framework (True)
+
+BitArray userAnswers = new BitArray(4);
+
+Console.WriteLine("Please answer the following questions with 'T' for True or 'F' for False:");
+
+// Q1
+Console.Write("Q1: Collection namespace has ICollection interface (T/F): ");
+string q1Answer = Console.ReadLine();
+userAnswers[0] = (q1Answer.ToUpper() == "T");
+
+// Q2
+Console.Write("Q2: An IList in C# represents the class List in other languages (T/F): ");
+string q2Answer = Console.ReadLine();
+userAnswers[1] = (q2Answer.ToUpper() == "F");
+
+// Q3
+Console.Write("Q3: An Array and any collection is interchangeable object types (T/F): ");
+string q3Answer = Console.ReadLine();
+userAnswers[2] = (q3Answer.ToUpper() == "F");
+
+// Q4
+Console.Write("Q4: Collection is a part of BCL in .Net Framework (T/F): ");
+string q4Answer = Console.ReadLine();
+userAnswers[3] = (q4Answer.ToUpper() == "T");
+
+// Calculate marks
+int totalMarks = 0;
+for (int i = 0; i < 4; i++)
+{
+    if (userAnswers[i] == actual[i])
+    {
+        totalMarks += 5;
+    }
+}
+
+Console.WriteLine($"You scored {totalMarks} out of 20 marks.");
+
+
+
+
+
+
+
+
+
+
+
+
 using System;
 
 class Employee

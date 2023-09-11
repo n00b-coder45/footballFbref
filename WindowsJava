@@ -1,5 +1,74 @@
 
 
+using System;
+using System.Collections;
+
+class Question
+{
+    public string QuestionName { get; set; }
+    public bool CorrectAnswer { get; set; }
+
+    public Question(string questionName, bool correctAnswer)
+    {
+        QuestionName = questionName;
+        CorrectAnswer = correctAnswer;
+    }
+}
+
+class Paper
+{
+    public BitArray AnsActual { get; set; }
+
+    public Paper()
+    {
+        AnsActual = new BitArray(4);
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Question[] questions = new Question[4];
+        questions[0] = new Question("Q1: Collection namespace has ICollection interface (T/F):", true);
+        questions[1] = new Question("Q2: An IList in C# represents the class List in other languages (T/F):", false);
+        questions[2] = new Question("Q3: An Array and any collection is interchangeable object types (T/F):", false);
+        questions[3] = new Question("Q4: Collection is a part of BCL in .Net Framework (T/F):", true);
+
+        Paper paper = new Paper();
+
+        Console.WriteLine("Please answer the following questions with 'T' for True or 'F' for False:");
+
+        for (int i = 0; i < questions.Length; i++)
+        {
+            Console.Write($"{questions[i].QuestionName} ");
+            string userAnswerStr = Console.ReadLine();
+            bool userAnswer = (userAnswerStr.ToUpper() == "T");
+            paper.AnsActual[i] = userAnswer;
+
+            if (userAnswer == questions[i].CorrectAnswer)
+            {
+                Console.WriteLine("Correct! +5 Marks");
+            }
+            else
+            {
+                Console.WriteLine("Incorrect! 0 Marks");
+            }
+        }
+
+        int totalMarks = paper.AnsActual.Cast<bool>().Count(ans => ans) * 5;
+        Console.WriteLine($"Total Marks: {totalMarks} out of 20 marks.");
+    }
+}
+
+
+
+
+
+
+
+
+
 BitArray actual = new BitArray(4);
 actual[0] = true;   // Q1: Collection namespace has ICollection interface (True)
 actual[1] = false;  // Q2: An IList in C# represents the class List in other languages (False)

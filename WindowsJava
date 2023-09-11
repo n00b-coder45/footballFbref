@@ -1,4 +1,77 @@
 
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        Queue<Person> seniorCitizenQueue = new Queue<Person>();
+        Queue<Person> generalQueue = new Queue<Person>();
+
+        // Input for 6 people
+        for (int i = 1; i <= 6; i++)
+        {
+            Console.Write($"Enter name for Person {i}: ");
+            string name = Console.ReadLine();
+            Console.Write($"Enter age for Person {i}: ");
+            int age = int.Parse(Console.ReadLine());
+
+            Person person = new Person(name, age);
+
+            if (age >= 60)
+            {
+                seniorCitizenQueue.Enqueue(person);
+            }
+            else
+            {
+                generalQueue.Enqueue(person);
+            }
+        }
+
+        Console.WriteLine("Processing Sequence:");
+
+        while (seniorCitizenQueue.Count > 0)
+        {
+            Console.WriteLine(seniorCitizenQueue.Dequeue());
+            if (generalQueue.Count > 0)
+                Console.WriteLine(generalQueue.Dequeue());
+        }
+
+        while (generalQueue.Count > 0)
+        {
+            Console.WriteLine(generalQueue.Dequeue());
+        }
+    }
+}
+
+class Person
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+
+    public Person(string name, int age)
+    {
+        Name = name;
+        Age = age;
+    }
+
+    public override string ToString()
+    {
+        return $"Name: {Name}, Age: {Age}";
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
 
 using System;
 using System.Collections;

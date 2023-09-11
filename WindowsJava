@@ -1,3 +1,67 @@
+using System;
+
+public class MaxMinFinder<T> where T : IComparable<T>
+{
+    public T FindMax(T a, T b, T c)
+    {
+        if (a.CompareTo(b) >= 0 && a.CompareTo(c) >= 0)
+        {
+            return a;
+        }
+        else if (b.CompareTo(a) >= 0 && b.CompareTo(c) >= 0)
+        {
+            return b;
+        }
+        else
+        {
+            return c;
+        }
+    }
+
+    public T FindMin(T a, T b, T c)
+    {
+        if (a.CompareTo(b) <= 0 && a.CompareTo(c) <= 0)
+        {
+            return a;
+        }
+        else if (b.CompareTo(a) <= 0 && b.CompareTo(c) <= 0)
+        {
+            return b;
+        }
+        else
+        {
+            return c;
+        }
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        MaxMinFinder<double> doubleFinder = new MaxMinFinder<double>();
+
+        double num1 = 12.5;
+        double num2 = 9.3;
+        double num3 = 15.7;
+
+        double max = doubleFinder.FindMax(num1, num2, num3);
+        double min = doubleFinder.FindMin(num1, num2, num3);
+
+        Console.WriteLine($"Max: {max}");
+        Console.WriteLine($"Min: {min}");
+    }
+}
+
+
+
+
+
+
+
+
+
+
 
 using System;
 using System.Collections.Generic;

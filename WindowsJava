@@ -1,3 +1,122 @@
+
+
+using System;
+using System.Collections.Generic;
+
+class Employee
+{
+    public string Name { get; set; }
+    public string Designation { get; set; }
+}
+
+class Program
+{
+    static void Main()
+    {
+        DesignationLists d = new DesignationLists();
+        int choice;
+        do
+        {
+            Console.WriteLine("Menu:");
+            Console.WriteLine("1. Add Employee");
+            Console.WriteLine("2. Display Employees");
+            Console.WriteLine("3. Exit");
+            Console.Write("Enter your choice: ");
+            if (int.TryParse(Console.ReadLine(), out choice))
+            {
+                switch (choice)
+                {
+                    case 1:
+                        Employee e = new Employee();
+                        Console.Write("Enter employee name: ");
+                        e.Name = Console.ReadLine();
+                        Console.Write("Enter employee designation (PM/PrM/TL/SP/JP): ");
+                        e.Designation = Console.ReadLine();
+                        e.Designation = e.Designation.ToUpper(); // Convert to uppercase for consistency
+                        e.Input(d);
+                        break;
+                    case 2:
+                        d.Display();
+                        break;
+                    case 3:
+                        Environment.Exit(0);
+                        break;
+                    default:
+                        Console.WriteLine("Invalid choice. Please try again.");
+                        break;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid input. Please enter a valid number.");
+            }
+        } while (choice != 3);
+    }
+}
+
+class DesignationLists
+{
+    private List<Employee> PM = new List<Employee>();
+    private List<Employee> PrM = new List<Employee>();
+    private List<Employee> TL = new List<Employee>();
+    private List<Employee> SP = new List<Employee>();
+    private List<Employee> JP = new List<Employee>();
+
+    public void Input(Employee e)
+    {
+        switch (e.Designation)
+        {
+            case "PM":
+                PM.Add(e);
+                break;
+            case "PRM":
+                PrM.Add(e);
+                break;
+            case "TL":
+                TL.Add(e);
+                break;
+            case "SP":
+                SP.Add(e);
+                break;
+            case "JP":
+                JP.Add(e);
+                break;
+            default:
+                Console.WriteLine("Invalid designation. Employee not added.");
+                break;
+        }
+    }
+
+    public void Display()
+    {
+        Console.WriteLine("Employees:");
+        DisplayList(PM);
+        DisplayList(PrM);
+        DisplayList(TL);
+        DisplayList(SP);
+        DisplayList(JP);
+    }
+
+    private void DisplayList(List<Employee> employees)
+    {
+        foreach (var employee in employees)
+        {
+            Console.WriteLine($"Name: {employee.Name}, Designation: {employee.Designation}");
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 using System;
 
 public class MaxMinFinder<T> where T : IComparable<T>

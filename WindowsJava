@@ -1,3 +1,50 @@
+CREATE FUNCTION chkPrime(@n INT)
+RETURNS NVARCHAR(50)
+AS
+BEGIN
+    DECLARE @i INT;
+    DECLARE @isPrime BIT = 1;
+
+    -- Check if the number is even
+    IF @n % 2 = 0
+    BEGIN
+        RETURN 'even';
+    END
+
+    -- Check if the number is 1
+    IF @n = 1
+    BEGIN
+        RETURN 'odd';
+    END
+
+    -- Check for odd prime numbers
+    SET @i = 3;
+    WHILE @i <= SQRT(@n)
+    BEGIN
+        IF @n % @i = 0
+        BEGIN
+            SET @isPrime = 0;
+            BREAK;
+        END
+        SET @i = @i + 2;
+    END
+
+    IF @isPrime = 1
+    BEGIN
+        RETURN 'oddprime';
+    END
+    ELSE
+    BEGIN
+        RETURN 'odd';
+    END
+END;
+
+
+
+
+
+
+
 
 
 using System;

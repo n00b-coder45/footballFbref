@@ -1,3 +1,24 @@
+
+CREATE FUNCTION GetEligibleGifts()
+RETURNS TABLE
+AS
+RETURN (
+    SELECT
+        c.Customer_id,
+        c.ZipCode,
+        CASE WHEN dbo.chkPrime(c.ZipCode) = 'yes' THEN 'yes' ELSE 'no' END AS EligibleGift
+    FROM
+        customers c
+);
+
+
+
+
+
+
+
+
+
 CREATE FUNCTION chkPrime(@n INT)
 RETURNS NVARCHAR(50)
 AS

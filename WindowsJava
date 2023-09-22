@@ -1,3 +1,41 @@
+Main:-------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABC IT Solutions</title>
+</head>
+<body>
+    <header>
+        <h1>Welcome to ABC IT Solutions</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+    </nav>
+    <section>
+        <h2>Our Directors</h2>
+        <ul>
+            <li>Director 1</li>
+            <li>Director 2</li>
+            <li>Director 3</li>
+            <li>Director 4</li>
+            <li>Director 5</li>
+        </ul>
+        <h2>About Our Services</h2>
+        <p>We provide a wide range of IT solutions to meet your business needs.</p>
+    </section>
+</body>
+</html>
+
+
+
+
+
 
 CREATE FUNCTION GetEligibleGifts()
 RETURNS TABLE

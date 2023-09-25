@@ -1,3 +1,49 @@
+Database:-
+using System;
+using System.Data.SqlClient;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.Write("Enter username: ");
+        string username = Console.ReadLine();
+
+        Console.Write("Enter password: ");
+        string password = Console.ReadLine();
+
+        string connectionString = "Data Source=yourServerName;Initial Catalog=yourDatabaseName;Integrated Security=True";
+
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            connection.Open();
+
+            string query = "SELECT COUNT(*) FROM Login WHERE uname = @username AND passwd = @password";
+            
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("@username", username);
+                command.Parameters.AddWithValue("@password", password);
+
+                int count = (int)command.ExecuteScalar();
+
+                if (count > 0)
+                {
+                    Console.WriteLine("Login successful");
+                }
+                else
+                {
+                    Console.WriteLine("Login NOT successful");
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
 Form.cshtml
 @model ExerciseMVC.Models.Student
 

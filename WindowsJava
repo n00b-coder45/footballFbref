@@ -1,3 +1,10 @@
+cmd.Parameters.AddWithValue("@Name", name);
+                    cmd.Parameters.AddWithValue("@UserName", userName);
+                    cmd.Parameters.AddWithValue("@Password", password);
+
+
+
+
 Database:-
 using System;
 using System.Data.SqlClient;

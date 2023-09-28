@@ -1,3 +1,73 @@
+public class AccountController : Controller
+{
+    // Implement login actions here
+    public ActionResult Login()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public ActionResult Login(string username, string password)
+    {
+        // Check if the input is valid (you can implement validation logic here)
+        if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
+        {
+            // Save user input in cookies
+            SetLoginCookies(username, password);
+            return RedirectToAction("Inbox");
+        }
+        else
+        {
+            ViewBag.ErrorMessage = "Invalid input. Please try again.";
+            return View();
+        }
+    }
+
+    private void SetLoginCookies(string username, string password)
+    {
+        // Set cookies for username and password (you can also encrypt the password)
+        Response.Cookies["Username"].Value = username;
+        Response.Cookies["Password"].Value = password;
+    }
+}
+
+public class InboxController : Controller
+{
+    // Implement inbox actions here
+    public ActionResult Inbox()
+    {
+        // Check if the user input (cookies) is present
+        if (Request.Cookies["Username"] != null && Request.Cookies["Password"] != null)
+        {
+            // Retrieve scratch messages and display them
+            List<ScratchMessage> messages = GetScratchMessages();
+            return View(messages);
+        }
+        else
+        {
+            // Redirect to the login page if input is not provided
+            return RedirectToAction("Login", "Account");
+        }
+    }
+
+    private List<ScratchMessage> GetScratchMessages()
+    {
+        // Implement code to retrieve scratch messages (e.g., from a database)
+        // For demo purposes, return some dummy data
+        return new List<ScratchMessage>
+        {
+            new ScratchMessage { Subject = "Message 1", Content = "Hello, World!" },
+            new ScratchMessage { Subject = "Message 2", Content = "This is a test message." }
+        };
+    }
+}
+
+
+
+
+
+
+
 cmd.Parameters.AddWithValue("@Name", name);
                     cmd.Parameters.AddWithValue("@UserName", userName);
                     cmd.Parameters.AddWithValue("@Password", password);

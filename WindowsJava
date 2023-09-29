@@ -1,3 +1,189 @@
+Controller:
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+
+public class MCQController : Controller
+{
+    // Action for the first question
+    public IActionResult Question1()
+    {
+        return View();
+    }
+
+    // Action for processing the answer to the first question
+    [HttpPost]
+    public IActionResult Question1(string answer)
+    {
+        // Set or update the cookie for Question 1
+        Response.Cookies.Append("Q1", answer);
+
+        // Redirect to the second question
+        return RedirectToAction("Question2");
+    }
+
+    // Action for the second question
+    public IActionResult Question2()
+    {
+        return View();
+    }
+
+    // Action for processing the answer to the second question
+    [HttpPost]
+    public IActionResult Question2(string answer)
+    {
+        // Set or update the cookie for Question 2
+        Response.Cookies.Append("Q2", answer);
+
+        // Redirect to the third question
+        return RedirectToAction("Question3");
+    }
+
+    // Action for the third question
+    public IActionResult Question3()
+    {
+        return View();
+    }
+
+    // Action for processing the answer to the third question
+    [HttpPost]
+    public IActionResult Question3(string answer)
+    {
+        // Set or update the cookie for Question 3
+        Response.Cookies.Append("Q3", answer);
+
+        // Redirect to the "See Results" page
+        return RedirectToAction("SeeResults");
+    }
+
+    // Action to see the results
+    public IActionResult SeeResults()
+    {
+        // Calculate total marks based on correct answers
+        int totalMarks = CalculateTotalMarks();
+
+        // Pass the total marks to the view
+        ViewBag.TotalMarks = totalMarks;
+
+        // Display the results
+        return View();
+    }
+
+    // Helper method to calculate total marks
+    private int CalculateTotalMarks()
+    {
+        int totalMarks = 0;
+
+        // Compare user answers with correct answers
+        if (HttpContext.Request.Cookies["Q1"] == "CorrectAnswerForQ1")
+        {
+            totalMarks++;
+        }
+
+        if (HttpContext.Request.Cookies["Q2"] == "CorrectAnswerForQ2")
+        {
+            totalMarks++;
+        }
+
+        if (HttpContext.Request.Cookies["Q3"] == "CorrectAnswerForQ3")
+        {
+            totalMarks++;
+        }
+
+        return totalMarks;
+    }
+}
+Question1.cshtml
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Question 1</title>
+</head>
+<body>
+    <h2>Question 1</h2>
+    <p>Select the correct answer:</p>
+
+    <form method="post" action="/MCQ/Question1">
+        <select name="answer">
+            <option value="Option1">Option 1</option>
+            <option value="Option2">Option 2</option>
+            <option value="Option3">Option 3</option>
+            <option value="Option4">Option 4</option>
+        </select>
+
+        <button type="submit">Next</button>
+    </form>
+</body>
+</html>
+Question2.cshtml
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Question 2</title>
+</head>
+<body>
+    <h2>Question 2</h2>
+    <p>Select the correct answer:</p>
+
+    <form method="post" action="/MCQ/Question2">
+        <select name="answer">
+            <option value="Option1">Option 1</option>
+            <option value="Option2">Option 2</option>
+            <option value="Option3">Option 3</option>
+            <option value="Option4">Option 4</option>
+        </select>
+
+        <button type="submit">Next</button>
+    </form>
+
+    <form method="post" action="/MCQ/Question1">
+        <button type="submit">Previous</button>
+    </form>
+</body>
+</html>
+Question3.cshtml
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Question 3</title>
+</head>
+<body>
+    <h2>Question 3</h2>
+    <p>Select the correct answer:</p>
+
+    <form method="post" action="/MCQ/Question3">
+        <select name="answer">
+            <option value="Option1">Option 1</option>
+            <option value="Option2">Option 2</option>
+            <option value="Option3">Option 3</option>
+            <option value="Option4">Option 4</option>
+        </select>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <form method="post" action="/MCQ/Question2">
+        <button type="submit">Previous</button>
+    </form>
+</body>
+</html>
+Last:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>See Results</title>
+</head>
+<body>
+    <h2>Results</h2>
+    <p>Your total marks: @ViewBag.TotalMarks</p>
+</body>
+</html>
+
+
+
+
+
+
+
 public class AccountController : Controller
 {
     // Implement login actions here

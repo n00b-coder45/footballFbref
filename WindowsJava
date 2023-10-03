@@ -1,3 +1,35 @@
+// Employees.cs
+using System.Collections.Generic;
+
+public class Employees
+{
+    private List<Employee> empList;
+
+    public Employees()
+    {
+        empList = new List<Employee>();
+        // Add 3 employees to empList (as per your requirement)
+        empList.Add(new Employee(1, "John Doe"));
+        empList.Add(new Employee(2, "Jane Smith"));
+        empList.Add(new Employee(3, "Bob Johnson"));
+    }
+
+    public List<Employee> ReturnList()
+    {
+        return empList;
+    }
+
+    public void AddEmp(int id, string name)
+    {
+        empList.Add(new Employee(id, name));
+    }
+}
+
+
+
+
+
+
 Controller:
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;

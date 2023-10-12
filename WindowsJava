@@ -1,3 +1,32 @@
+// Implementation of the overloaded function
+function sum(x: number | string, y: number | string, z?: number, p?: number): number | string {
+  if (typeof x === 'number' && typeof y === 'number') {
+    if (z !== undefined && p !== undefined) {
+      // Implementation for overloaded function: int sum(int x, int y, int z, int p)
+      return x + y + z + p;
+    } else {
+      // Implementation for overloaded function: int sum(int x, int y)
+      return x + y;
+    }
+  } else if (typeof x === 'string' && typeof y === 'string') {
+    // Implementation for overloaded function: string sum(string x, string y)
+    return x + y;
+  }
+  // Return a default value or handle the case as needed
+  return 0; // For example, you can return 0 for invalid cases
+}
+
+// Examples
+console.log(sum(1, 2));         // Output: 3
+console.log(sum('Hello', ' World'));  // Output: Hello World
+console.log(sum(1, 2, 3, 4));    // Output: 10
+
+
+
+
+
+
+
 // Employees.cs
 using System.Collections.Generic;
 

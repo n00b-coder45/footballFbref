@@ -1,3 +1,33 @@
+app-conponent.html
+
+<!-- app.component2.html -->
+<table style="width: 100%;">
+  <tr>
+    <!-- Left side (Login Component) -->
+    <td style="width: 30%;">
+      <app-login></app-login>
+    </td>
+
+    <!-- Right side (Instructions and Advertisement stacked) -->
+    <td style="vertical-align: top;">
+      <!-- Instructions Component -->
+      <app-instructions></app-instructions>
+
+      <!-- Advertisement Component -->
+      <app-advertisement></app-advertisement>
+    </td>
+  </tr>
+</table>
+
+
+
+
+
+
+
+
+
+
 // Implementation of the overloaded function
 function sum(x: number | string, y: number | string, z?: number, p?: number): number | string {
   if (typeof x === 'number' && typeof y === 'number') {
